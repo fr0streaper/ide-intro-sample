@@ -53,6 +53,11 @@ public class PolishExpressionParserTest {
         assertEquals("2.0 2.0 * 2.0 / 2.0 + 2.0 - 2.0 ^ 2.0 log neg neg exp ln sqr sqrt", parser.parse("2 2 * 2 / 2 + 2 - 2 ^ 2 log neg neg exp ln sqr sqrt").toString());
     }
 
+    @Test
+    public void whateverReleaseTest() {
+        assertTrue(Math.abs(1.0 - parser.parse("1 1 + 2 log").evaluate()) < EPS);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void basicInvalidArgumentParseTest() {
         parser.parse(null);
