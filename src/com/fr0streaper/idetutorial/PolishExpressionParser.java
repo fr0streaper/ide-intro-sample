@@ -9,7 +9,9 @@ public class PolishExpressionParser {
                                                                     Map.entry("+", Add.class),
                                                                     Map.entry("-", Subtract.class),
                                                                     Map.entry("*", Multiply.class),
-                                                                    Map.entry("/", Divide.class));
+                                                                    Map.entry("/", Divide.class),
+                                                                    Map.entry("log", Log.class),
+                                                                    Map.entry("^", Power.class));
 
     public static final Map<String, Class<? extends Expression>> unaryExpressions = Map.ofEntries(
                                                                     Map.entry("neg", Negate.class),

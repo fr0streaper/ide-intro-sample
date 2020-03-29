@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 public class PolishExpressionParserTest {
 
+    public static final Double EPS = 1e-6;
     public static final PolishExpressionParser parser = new PolishExpressionParser();
 
     @Test
@@ -35,6 +36,11 @@ public class PolishExpressionParserTest {
     @Test
     public void basicAdvancedOperationsTest() {
         assertEquals(new Double(2), parser.parse("2 exp sqr ln sqrt").evaluate());
+    }
+
+    @Test
+    public void complexAdvancedOperationsTest() {
+        assertTrue(Math.abs(1.0 - parser.parse("3 2 6 / ^ 9 log 6 *").evaluate()) < EPS);
     }
 
     @Test(expected = IllegalArgumentException.class)
