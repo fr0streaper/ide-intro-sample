@@ -1,10 +1,15 @@
 package com.fr0streaper.idetutorial;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class PolishExpressionParser {
 
-    public static final List<String> binaryOperations = Arrays.asList( "+", "-", "*", "/" );
+    public static final Map<String, Class> binaryExpressions = Map.ofEntries(
+                                                                    Map.entry("+", Add.class),
+                                                                    Map.entry("-", Subtract.class),
+                                                                    Map.entry("*", Multiply.class),
+                                                                    Map.entry("/", Divide.class));
 
     public Expression parse(String expr) throws IllegalArgumentException {
         if (expr == null) {
@@ -13,36 +18,27 @@ public class PolishExpressionParser {
 
         List<String> args = Arrays.asList(expr.split(" "));
 
-        Stack<Expression> expression = new Stack<Expression>();
+        Stack<Expression> expression = new Stack<>();
         for (String arg : args) {
-            if (binaryOperations.contains(arg)) {
+            if (binaryExpressions.keySet().contains(arg)) {
                 if (expression.size() < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for operation " + arg + "; Expected: 2, found: " + expression.size());
                 }
 
-
-
                 Expression arg2 = expression.pop();
                 Expression arg1 = expression.pop();
 
-                if (arg.equals("+")) {
-                    expression.push(new Add(arg1, arg2));
-                }
-                else if (arg.equals("-")) {
-                    expression.push(new Subtract(arg1, arg2));
-                }
-                else if (arg.equals("*")) {
-                    expression.push(new Multiply(arg1, arg2));
-                }
-                else if (arg.equals("/")) {
-                    expression.push(new Divide(arg1, arg2));
+                try {
+                    expression.push((Expression) binaryExpressions.get(arg).getConstructor(Expression.class, Expression.class).newInstance(arg1, arg2));
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                    throw new IllegalArgumentException("Invalid operation argument: " + arg, e);
                 }
             }
             else {
                 try {
                     expression.push(new Constant(Double.parseDouble(arg)));
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Invalid numbeer argument: " + arg, e);
+                    throw new IllegalArgumentException("Invalid number argument: " + arg, e);
                 }
             }
         }
