@@ -5,11 +5,14 @@ import java.util.*;
 
 public class PolishExpressionParser {
 
-    public static final Map<String, Class> binaryExpressions = Map.ofEntries(
+    public static final Map<String, Class<? extends Expression>> binaryExpressions = Map.ofEntries(
                                                                     Map.entry("+", Add.class),
                                                                     Map.entry("-", Subtract.class),
                                                                     Map.entry("*", Multiply.class),
                                                                     Map.entry("/", Divide.class));
+
+    public static final Map<String, Class<? extends Expression>> unaryExpressions = Map.ofEntries(
+                                                                    Map.entry("neg", Negate.class));
 
     public Expression parse(String expr) throws IllegalArgumentException {
         if (expr == null) {
@@ -20,7 +23,7 @@ public class PolishExpressionParser {
 
         Stack<Expression> expression = new Stack<>();
         for (String arg : args) {
-            if (binaryExpressions.keySet().contains(arg)) {
+            if (binaryExpressions.containsKey(arg)) {
                 if (expression.size() < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for operation " + arg + "; Expected: 2, found: " + expression.size());
                 }
@@ -29,7 +32,20 @@ public class PolishExpressionParser {
                 Expression arg1 = expression.pop();
 
                 try {
-                    expression.push((Expression) binaryExpressions.get(arg).getConstructor(Expression.class, Expression.class).newInstance(arg1, arg2));
+                    expression.push(binaryExpressions.get(arg).getConstructor(Expression.class, Expression.class).newInstance(arg1, arg2));
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                    throw new IllegalArgumentException("Invalid operation argument: " + arg, e);
+                }
+            }
+            else if (unaryExpressions.containsKey(arg)) {
+                if (expression.size() < 1) {
+                    throw new IllegalArgumentException("Insufficient arguments for operation " + arg + "; Expected: 1, found: " + expression.size());
+                }
+
+                Expression arg1 = expression.pop();
+
+                try {
+                    expression.push(unaryExpressions.get(arg).getConstructor(Expression.class).newInstance(arg1));
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                     throw new IllegalArgumentException("Invalid operation argument: " + arg, e);
                 }
