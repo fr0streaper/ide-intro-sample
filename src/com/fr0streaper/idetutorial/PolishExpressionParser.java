@@ -1,5 +1,8 @@
 package com.fr0streaper.idetutorial;
 
+import ExpressionTypes.Expression;
+import Expressions.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 

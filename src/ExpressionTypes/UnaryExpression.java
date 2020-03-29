@@ -1,4 +1,4 @@
-package com.fr0streaper.idetutorial;
+package ExpressionTypes;
 
 public abstract class UnaryExpression implements Expression {
 

@@ -1,4 +1,7 @@
-package com.fr0streaper.idetutorial;
+package Expressions;
+
+import ExpressionTypes.Expression;
+import ExpressionTypes.UnaryExpression;
 
 public class Exp extends UnaryExpression {
 

@@ -1,4 +1,4 @@
-package com.fr0streaper.idetutorial;
+package ExpressionTypes;
 
 public interface Expression {
 

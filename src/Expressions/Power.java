@@ -1,4 +1,7 @@
-package com.fr0streaper.idetutorial;
+package Expressions;
+
+import ExpressionTypes.BinaryExpression;
+import ExpressionTypes.Expression;
 
 public class Power extends BinaryExpression {
 

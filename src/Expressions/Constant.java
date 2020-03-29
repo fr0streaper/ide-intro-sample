@@ -1,4 +1,6 @@
-package com.fr0streaper.idetutorial;
+package Expressions;
+
+import ExpressionTypes.Expression;
 
 public class Constant implements Expression {
 
