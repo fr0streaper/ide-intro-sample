@@ -1,0 +1,6 @@
+[submodule "src/ExpressionTypes"]
+	path = src/ExpressionTypes
+	url = https://github.com/fr0streaper/ide-intro-sample-sub-expr-types.git
+[submodule "src/Expressions"]
+	path = src/Expressions
+	url = https://github.com/fr0streaper/ide-intro-sample-sub-exprs.git
