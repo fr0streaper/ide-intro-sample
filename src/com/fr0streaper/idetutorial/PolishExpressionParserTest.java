@@ -27,6 +27,11 @@ public class PolishExpressionParserTest {
         assertEquals(new Double(4), parser.parse("2 neg 3 neg * 4 * 5 neg neg - 1 + 2 3 + /").evaluate());
     }
 
+    @Test
+    public void reallyComplexReleaseTest() {
+        assertEquals(new Double(-12), parser.parse("2 neg 5 * 3 / 4 neg neg * 4 3 neg / -").evaluate());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void basicInvalidArgumentParseTest() {
         parser.parse(null);
