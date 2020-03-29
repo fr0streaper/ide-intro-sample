@@ -11,4 +11,10 @@ public class Sqr extends UnaryExpression {
         Double value = arg.evaluate();
         return value * value;
     }
+
+    @Override
+    public String toString() {
+        return arg.toString() + " sqr";
+    }
+
 }

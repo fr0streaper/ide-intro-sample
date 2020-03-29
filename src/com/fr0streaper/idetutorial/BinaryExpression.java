@@ -11,4 +11,6 @@ public abstract class BinaryExpression implements Expression {
 
     public abstract Double evaluate();
 
+    public abstract String toString();
+
 }

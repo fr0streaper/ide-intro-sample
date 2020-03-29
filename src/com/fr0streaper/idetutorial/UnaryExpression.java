@@ -10,4 +10,6 @@ public abstract class UnaryExpression implements Expression {
 
     public abstract Double evaluate();
 
+    public abstract String toString();
+
 }

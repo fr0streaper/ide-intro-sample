@@ -11,4 +11,9 @@ public class Multiply extends BinaryExpression {
         return arg1.evaluate() * arg2.evaluate();
     }
 
+    @Override
+    public String toString() {
+        return arg1.toString() + " " + arg2.toString() + " *";
+    }
+
 }

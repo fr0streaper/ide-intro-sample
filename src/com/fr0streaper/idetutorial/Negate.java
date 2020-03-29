@@ -10,4 +10,9 @@ public class Negate extends UnaryExpression {
     public Double evaluate() {
         return -1 * arg.evaluate();
     }
+
+    @Override
+    public String toString() {
+        return arg.toString() + " neg";
+    }
 }

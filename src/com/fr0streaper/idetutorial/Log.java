@@ -11,4 +11,9 @@ public class Log extends BinaryExpression {
         return Math.log(arg1.evaluate()) / Math.log(arg2.evaluate());
     }
 
+    @Override
+    public String toString() {
+        return arg1.toString() + " " + arg2.toString() + " log";
+    }
+
 }

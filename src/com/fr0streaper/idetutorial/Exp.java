@@ -10,4 +10,9 @@ public class Exp extends UnaryExpression {
     public Double evaluate() {
         return Math.pow(Math.E, arg.evaluate());
     }
+
+    @Override
+    public String toString() {
+        return arg.toString() + " exp";
+    }
 }

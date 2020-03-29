@@ -4,4 +4,6 @@ public interface Expression {
 
     Double evaluate();
 
+    String toString();
+
 }
