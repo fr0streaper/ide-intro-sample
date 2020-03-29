@@ -32,6 +32,11 @@ public class PolishExpressionParserTest {
         assertEquals(new Double(-12), parser.parse("2 neg 5 * 3 / 4 neg neg * 4 3 neg / -").evaluate());
     }
 
+    @Test
+    public void basicAdvancedOperationsTest() {
+        assertEquals(new Double(2), parser.parse("2 exp sqr ln sqrt").evaluate());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void basicInvalidArgumentParseTest() {
         parser.parse(null);

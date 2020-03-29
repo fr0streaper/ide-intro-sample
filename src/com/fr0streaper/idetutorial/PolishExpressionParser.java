@@ -12,7 +12,11 @@ public class PolishExpressionParser {
                                                                     Map.entry("/", Divide.class));
 
     public static final Map<String, Class<? extends Expression>> unaryExpressions = Map.ofEntries(
-                                                                    Map.entry("neg", Negate.class));
+                                                                    Map.entry("neg", Negate.class),
+                                                                    Map.entry("sqrt", Sqrt.class),
+                                                                    Map.entry("sqr", Sqr.class),
+                                                                    Map.entry("exp", Exp.class),
+                                                                    Map.entry("ln", Ln.class));
 
     public Expression parse(String expr) throws IllegalArgumentException {
         if (expr == null) {
